@@ -1,0 +1,5 @@
+@extends('layouts.app') @section('content')
+<h2>Executive Dashboard</h2><div class="grid">
+<div class="card"><h3>Clients</h3><h2>{{ $totalClients }}</h2></div><div class="card"><h3>Projects</h3><h2>{{ $totalProjects }}</h2></div><div class="card"><h3>Total Investment</h3><h2>₦{{ number_format($totalInvestment,2) }}</h2></div><div class="card"><h3>Expected Profit</h3><h2>₦{{ number_format($expectedProfit,2) }}</h2></div><div class="card"><h3>Total Paid</h3><h2>₦{{ number_format($totalPaid,2) }}</h2></div><div class="card"><h3>Procurement Value</h3><h2>₦{{ number_format($procurementValue,2) }}</h2></div><div class="card"><h3>Pending Legal</h3><h2>{{ $pendingLegal }}</h2></div>
+</div><div class="card"><h3>Recent Projects</h3><table><tr><th>ID</th><th>Client</th><th>Status</th><th>Profit Status</th></tr>@foreach($recentProjects as $p)<tr><td>{{ $p->project_id }}</td><td>{{ $p->client->full_name }}</td><td>{{ $p->project_status }}</td><td>{{ optional($p->investment)->profit_margin_status ?? 'None' }}</td></tr>@endforeach</table></div>
+@endsection
