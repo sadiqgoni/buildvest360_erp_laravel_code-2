@@ -20,8 +20,23 @@ class Client extends Model
         });
     }
 
+    public function portalUsers()
+    {
+        return $this->hasMany(User::class);
+    }
+
     public function projects()
     {
         return $this->hasMany(Project::class);
+    }
+
+    public function selections()
+    {
+        return $this->hasMany(ClientSelection::class);
+    }
+
+    public function riskAssessments()
+    {
+        return $this->hasMany(RiskAssessment::class);
     }
 }

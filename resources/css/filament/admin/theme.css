@@ -1,0 +1,193 @@
+@import '../../../../vendor/filament/filament/resources/css/theme.css';
+
+@source '../../../../app/Filament/**/*';
+@source '../../../../resources/views/filament/**/*';
+
+:root {
+    --bv-navy: #0f172a;
+    --bv-blue-950: #172554;
+    --bv-blue-900: #1e3a8a;
+    --bv-blue-700: #1d4ed8;
+    --bv-blue-600: #2563eb;
+    --bv-blue-500: #3b82f6;
+    --bv-sky-300: #7dd3fc;
+    --bv-sky-100: #e0f2fe;
+    --bv-surface: rgba(255, 255, 255, 0.88);
+    --bv-border: rgba(148, 163, 184, 0.18);
+    --bv-text: #10203b;
+    --bv-muted: #52637e;
+}
+
+.fi-body {
+    background:
+        radial-gradient(circle at top left, rgba(59, 130, 246, 0.22), transparent 30%),
+        radial-gradient(circle at top right, rgba(125, 211, 252, 0.18), transparent 24%),
+        linear-gradient(180deg, #eff6ff 0%, #e0f2fe 38%, #f8fbff 100%);
+    color: var(--bv-text);
+}
+
+.fi-simple-main,
+.fi-main {
+    position: relative;
+}
+
+.fi-simple-main::before,
+.fi-main::before {
+    content: '';
+    position: fixed;
+    right: -8rem;
+    bottom: -8rem;
+    width: 28rem;
+    height: 28rem;
+    border-radius: 999px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.22), transparent 62%);
+    filter: blur(22px);
+    pointer-events: none;
+}
+
+.fi-sidebar,
+.fi-topbar,
+.fi-section,
+.fi-ta,
+.fi-wi-widget,
+.fi-modal-window {
+    backdrop-filter: blur(16px);
+}
+
+.fi-sidebar {
+    background: linear-gradient(180deg, rgba(30, 58, 138, 0.96), rgba(29, 78, 216, 0.96));
+    border-inline-end: 1px solid rgba(125, 211, 252, 0.18);
+    box-shadow: 0 18px 48px rgba(15, 23, 42, 0.22);
+}
+
+.fi-sidebar-header {
+    background: transparent;
+}
+
+.fi-topbar {
+    background: rgba(255, 255, 255, 0.72);
+    border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+}
+
+.fi-section,
+.fi-ta,
+.fi-wi-widget,
+.fi-modal-window {
+    background: var(--bv-surface);
+    border: 1px solid var(--bv-border);
+    border-radius: 1.3rem;
+    box-shadow: 0 18px 48px rgba(37, 99, 235, 0.08);
+}
+
+.fi-wi-stats-overview-stat {
+    border-radius: 1.15rem;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(239, 246, 255, 0.92));
+    border: 1px solid rgba(96, 165, 250, 0.18);
+    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.08);
+}
+
+.fi-page-header-heading {
+    color: var(--bv-blue-950);
+    letter-spacing: -0.03em;
+}
+
+.fi-page-header-subheading {
+    color: var(--bv-muted);
+    max-width: 56rem;
+}
+
+.fi-sidebar-group-label,
+.fi-sidebar-item-label,
+.fi-sidebar-item-icon,
+.fi-sidebar-group-icon,
+.fi-icon-btn {
+    color: rgba(255, 255, 255, 0.92);
+}
+
+.fi-sidebar-item-btn {
+    border-radius: 0.95rem;
+    margin-bottom: 0.22rem;
+}
+
+.fi-sidebar-item-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(239, 246, 255, 0.94)) !important;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.14), inset 0 0 0 1px rgba(96, 165, 250, 0.22);
+}
+
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn > .fi-sidebar-item-label {
+    color: var(--bv-blue-900) !important;
+}
+
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn > .fi-sidebar-item-label {
+    font-weight: 700;
+}
+
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn > .fi-icon {
+    color: var(--bv-blue-700) !important;
+}
+
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn > .fi-sidebar-item-grouped-border > .fi-sidebar-item-grouped-border-part {
+    background-color: var(--bv-blue-700) !important;
+}
+
+.fi-btn {
+    border-radius: 0.9rem;
+    font-weight: 600;
+}
+
+.fi-btn:hover {
+    transform: translateY(-1px);
+}
+
+.fi-ta-header-cell-label {
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 0.74rem;
+}
+
+.fi-badge {
+    border-radius: 999px;
+}
+
+.fi-input-wrp,
+.fi-select-input,
+.fi-textarea,
+.fi-input {
+    border-radius: 0.95rem;
+}
+
+.fi-input:focus,
+.fi-select-input:focus,
+.fi-textarea:focus {
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.14);
+}
+
+.fi-simple-main {
+    background: rgba(255, 255, 255, 0.82);
+    border: 1px solid rgba(96, 165, 250, 0.16);
+    border-radius: 1.5rem;
+    box-shadow: 0 24px 60px rgba(30, 58, 138, 0.16);
+}
+
+.fi-logo:is(img) {
+    border-radius: 0.9rem;
+    background: rgba(255, 255, 255, 0.14);
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.18);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.fi-logo:is(img):hover {
+    transform: scale(1.03);
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.22);
+}
+
+.apexcharts-legend-text,
+.apexcharts-text,
+.apexcharts-xaxis-label,
+.apexcharts-yaxis-label {
+    font-family: inherit !important;
+}

@@ -2,8 +2,12 @@
 
 namespace App\Filament\Resources\Clients\Schemas;
 
+use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
 class ClientForm
@@ -12,50 +16,52 @@ class ClientForm
     {
         return $schema
             ->components([
-                TextInput::make('client_id')
-                    ->required(),
-                TextInput::make('full_name')
-                    ->required(),
-                TextInput::make('gender')
-                    ->default(null),
-                TextInput::make('phone')
-                    ->tel()
-                    ->required(),
-                TextInput::make('alternative_phone')
-                    ->tel()
-                    ->default(null),
-                TextInput::make('email')
-                    ->label('Email address')
-                    ->email()
-                    ->default(null),
-                TextInput::make('occupation')
-                    ->default(null),
-                TextInput::make('employer')
-                    ->default(null),
-                TextInput::make('job_title')
-                    ->default(null),
-                Textarea::make('office_address')
-                    ->default(null)
-                    ->columnSpanFull(),
-                TextInput::make('monthly_income')
-                    ->default(null),
-                Textarea::make('residential_address')
-                    ->default(null)
-                    ->columnSpanFull(),
-                TextInput::make('state')
-                    ->default(null),
-                TextInput::make('lga')
-                    ->default(null),
-                TextInput::make('ward')
-                    ->default(null),
-                Textarea::make('landmark')
-                    ->default(null)
-                    ->columnSpanFull(),
-                TextInput::make('house_ownership')
-                    ->default(null),
-                TextInput::make('status')
-                    ->required()
-                    ->default('Active'),
+                Hidden::make('client_id'),
+                Section::make('Client Profile')
+                    ->schema([
+                        Grid::make(2)->schema([
+                            TextInput::make('full_name')
+                                ->label('Client Name')
+                                ->required(),
+                            TextInput::make('email')
+                                ->label('Email Address')
+                                ->email()
+                                ->required(),
+                            TextInput::make('phone')
+                                ->tel()
+                                ->required(),
+                            TextInput::make('occupation'),
+                            Select::make('state')
+                                ->options([
+                                    'Lagos' => 'Lagos',
+                                    'Abuja FCT' => 'Abuja FCT',
+                                    'Rivers' => 'Rivers',
+                                    'Ogun' => 'Ogun',
+                                    'Oyo' => 'Oyo',
+                                    'Delta' => 'Delta',
+                                    'Anambra' => 'Anambra',
+                                    'Kaduna' => 'Kaduna',
+                                ])
+                                ->searchable()
+                                ->required(),
+                            TextInput::make('lga')
+                                ->label('LGA')
+                                ->required(),
+                            Select::make('status')
+                                ->options([
+                                    'Active' => 'Active',
+                                    'Prospect' => 'Prospect',
+                                    'Inactive' => 'Inactive',
+                                ])
+                                ->default('Active')
+                                ->required(),
+                        ]),
+                        Textarea::make('residential_address')
+                            ->required()
+                            ->columnSpanFull(),
+                        Textarea::make('landmark')
+                            ->columnSpanFull(),
+                    ]),
             ]);
     }
 }

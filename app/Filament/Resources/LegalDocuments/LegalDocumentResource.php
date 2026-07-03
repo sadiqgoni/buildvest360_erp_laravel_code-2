@@ -20,7 +20,13 @@ class LegalDocumentResource extends Resource
 {
     protected static ?string $model = LegalDocument::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentText;
+
+    protected static ?string $navigationLabel = 'Legal Documents';
+
+    protected static string|\UnitEnum|null $navigationGroup = 'Finance & Contracts';
+
+    protected static ?int $navigationSort = 3;
 
     public static function form(Schema $schema): Schema
     {
@@ -39,9 +45,7 @@ class LegalDocumentResource extends Resource
 
     public static function getRelations(): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 
     public static function getPages(): array

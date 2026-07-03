@@ -15,43 +15,32 @@ class MeasurementsTable
     {
         return $table
             ->columns([
-                TextColumn::make('project_id')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('client_ground_floor_sqm')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('client_first_floor_sqm')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('client_other_floor_sqm')
-                    ->numeric()
+                TextColumn::make('project.project_id')
+                    ->label('Project Ref')
+                    ->searchable()
                     ->sortable(),
                 TextColumn::make('client_total_sqm')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('engineer_ground_floor_sqm')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('engineer_first_floor_sqm')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('engineer_other_floor_sqm')
+                    ->label('Client Total')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('engineer_total_sqm')
+                    ->label('Engineer Total')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('measurement_difference_sqm')
+                    ->label('Difference')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('measurement_difference_percent')
+                    ->label('Variance %')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('approved_area_sqm')
+                    ->label('Approved Area')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('measurement_status')
+                    ->badge()
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()

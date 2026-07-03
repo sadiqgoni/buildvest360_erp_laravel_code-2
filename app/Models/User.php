@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
@@ -12,18 +11,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password'])]
+#[Fillable(['name', 'email', 'role', 'client_id', 'password'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable implements FilamentUser
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
@@ -32,8 +26,17 @@ class User extends Authenticatable implements FilamentUser
         ];
     }
 
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
+
     public function canAccessPanel(Panel $panel): bool
     {
-        return true;
+        return match ($this->role) {
+            'admin' => in_array($panel->getId(), ['admin', 'client'], true),
+            'client' => filled($this->client_id) && in_array($panel->getId(), ['admin', 'client'], true),
+            default => false,
+        };
     }
 }

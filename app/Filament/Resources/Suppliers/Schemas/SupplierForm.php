@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Suppliers\Schemas;
 
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Schema;
@@ -15,22 +16,32 @@ class SupplierForm
                 TextInput::make('supplier_name')
                     ->required(),
                 TextInput::make('contact_person')
-                    ->default(null),
+                    ->required(),
                 TextInput::make('phone')
                     ->tel()
-                    ->default(null),
+                    ->required(),
                 TextInput::make('email')
                     ->label('Email address')
-                    ->email()
-                    ->default(null),
+                    ->email(),
+                Select::make('category')
+                    ->options([
+                        'Cement & Concrete' => 'Cement & Concrete',
+                        'Steel & Reinforcement' => 'Steel & Reinforcement',
+                        'Electricals' => 'Electricals',
+                        'Finishing Materials' => 'Finishing Materials',
+                        'General Building Materials' => 'General Building Materials',
+                    ])
+                    ->required(),
                 Textarea::make('address')
-                    ->default(null)
                     ->columnSpanFull(),
-                TextInput::make('category')
-                    ->default(null),
-                TextInput::make('status')
-                    ->required()
-                    ->default('Active'),
+                Select::make('status')
+                    ->options([
+                        'Active' => 'Active',
+                        'Blacklisted' => 'Blacklisted',
+                        'Inactive' => 'Inactive',
+                    ])
+                    ->default('Active')
+                    ->required(),
             ]);
     }
 }

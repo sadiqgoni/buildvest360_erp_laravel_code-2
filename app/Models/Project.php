@@ -9,7 +9,32 @@ class Project extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['project_id','client_id','project_address','building_type','construction_stage','number_of_floors','number_of_bedrooms','finishing_works','approved_area_sqm','cost_per_sqm','estimated_completion_cost','project_status'];
+    protected $fillable = [
+        'project_id',
+        'client_id',
+        'service_type',
+        'project_origin',
+        'project_address',
+        'building_type',
+        'construction_stage',
+        'current_progress_percent',
+        'number_of_floors',
+        'number_of_bedrooms',
+        'finishing_works',
+        'client_objectives',
+        'approved_area_sqm',
+        'cost_per_sqm',
+        'estimated_completion_cost',
+        'project_status',
+        'client_portal_visible',
+    ];
+
+    protected function casts(): array
+    {
+        return [
+            'client_portal_visible' => 'boolean',
+        ];
+    }
 
     protected static function booted(): void
     {
@@ -53,5 +78,20 @@ class Project extends Model
     public function legalDocuments()
     {
         return $this->hasMany(LegalDocument::class);
+    }
+
+    public function updates()
+    {
+        return $this->hasMany(ProjectUpdate::class)->latest('update_date');
+    }
+
+    public function selections()
+    {
+        return $this->hasMany(ClientSelection::class);
+    }
+
+    public function riskAssessments()
+    {
+        return $this->hasMany(RiskAssessment::class)->latest('assessed_at');
     }
 }

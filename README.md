@@ -1,58 +1,97 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Project Operations Portal
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Project Operations Portal is a Laravel 13 + Filament 5 construction operations platform for a Nigerian real-estate and building company.
 
-## About Laravel
+It now has two working sides:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- `Admin panel`: manage clients, projects, funding plans, construction updates, selections, payments, procurement, legal documents, and risk decisions.
+- `Client portal`: clients log in to track project progress, see construction updates, review finance decisions, view payments, and submit finish or scope choices.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Stack
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- Laravel 13
+- Filament 5
+- PHP 8.4
+- MySQL on `127.0.0.1:3306`
+- Database: MySQL
 
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## Run
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+composer install
+npm install
+php artisan migrate:fresh --seed
+npm run build
+php artisan serve --host=127.0.0.1 --port=8001
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+## URLs
 
-## Contributing
+- Admin: `http://127.0.0.1:8001/admin/login`
+- Client: `http://127.0.0.1:8001/client/login`
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Production Notes
 
-## Code of Conduct
+- Set `APP_ENV=production`
+- Set `APP_DEBUG=false`
+- Set `APP_URL` to your live domain
+- Set the real MySQL credentials in `.env`
+- Keep `APP_TIMEZONE=Africa/Lagos`
+- Run `php artisan migrate --force`
+- Only run `php artisan db:seed --force` in production if you want the admin user created automatically
+- In production, the seeder now skips demo clients, demo projects, and demo finance data
+- Run `php artisan storage:link` if you later add file uploads
+- Run `php artisan optimize` after deployment
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Login
 
-## Security Vulnerabilities
+```text
+Admin
+Email: admin@gmail.com
+Password: 12345678
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```text
+Client 1
+Email: amina.yusuf@gmail.com
+Password: 12345678
+```
 
-## License
+```text
+Client 2
+Email: chinedu.okafor@gmail.com
+Password: 12345678
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```text
+Client 3
+Email: zainab.bello@gmail.com
+Password: 12345678
+```
+
+## What The App Does
+
+- Tracks construction projects from registration to completion.
+- Handles contractor-led financing and client payment plan decisions.
+- Lets the company publish visible project updates to clients.
+- Lets clients submit finish choices, fittings, and other scope decisions.
+- Records payments, procurement, legal paperwork, and audit activity.
+- Shows simple risk guidance for whether a project or client finance setup looks low, medium, or high risk.
+
+## What To Test Tonight
+
+1. Log in as `admin@gmail.com` and open the dashboard.
+2. Check `Projects`, `Project Updates`, `Client Selections`, `Investments`, and `Risk Assessments`.
+3. Create a new project and confirm it returns to the index list after save.
+4. Edit an investment and confirm the payable amount and monthly contribution are recalculated automatically.
+5. Add a project update with `Show in client portal` enabled.
+6. Log in as `amina.yusuf@gmail.com` and confirm you can see only that client's projects and updates.
+7. In the client portal, open `Finish Choices` and submit a new choice.
+8. In the client portal, open `Finance Preferences` and update the payment preference on a record with status `proposed` or `countered`.
+9. Go back to admin and confirm the client-submitted selection and finance preference changes are visible there.
+
+## Notes
+
+- The legacy Blade starter has been removed from the active workflow.
+- Seed data uses Nigerian names, locations, and payment context.
+- The current product direction is inspired by common construction portal patterns such as owner/client updates, selections, and financing visibility used in platforms like Buildertrend, CoConstruct, and Procore.

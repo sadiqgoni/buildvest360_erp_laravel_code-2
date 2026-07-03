@@ -1,1 +1,0 @@
-@extends('layouts.app') @section('content')<h2>Audit Trail</h2><table><tr><th>Date</th><th>User</th><th>Action</th><th>Module</th><th>Reference</th></tr>@foreach($logs as $l)<tr><td>{{ $l->created_at }}</td><td>{{ $l->user_name }}</td><td>{{ $l->action }}</td><td>{{ $l->module }}</td><td>{{ $l->record_reference }}</td></tr>@endforeach</table>{{ $logs->links() }}@endsection

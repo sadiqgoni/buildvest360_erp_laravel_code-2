@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Projects\Schemas;
 
+use Filament\Infolists\Components\IconEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Schema;
 
@@ -11,13 +12,22 @@ class ProjectInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('project_id'),
-                TextEntry::make('client_id')
-                    ->numeric(),
+                TextEntry::make('project_id')
+                    ->label('Project Ref'),
+                TextEntry::make('client.full_name')
+                    ->label('Client'),
+                TextEntry::make('client.state')
+                    ->label('Client State')
+                    ->badge(),
+                TextEntry::make('service_type'),
+                TextEntry::make('project_origin'),
                 TextEntry::make('project_address')
                     ->columnSpanFull(),
                 TextEntry::make('building_type'),
                 TextEntry::make('construction_stage'),
+                TextEntry::make('current_progress_percent')
+                    ->label('Current Progress')
+                    ->suffix('%'),
                 TextEntry::make('number_of_floors')
                     ->numeric()
                     ->placeholder('-'),
@@ -27,16 +37,22 @@ class ProjectInfolist
                 TextEntry::make('finishing_works')
                     ->placeholder('-')
                     ->columnSpanFull(),
+                TextEntry::make('client_objectives')
+                    ->placeholder('-')
+                    ->columnSpanFull(),
                 TextEntry::make('approved_area_sqm')
                     ->numeric()
                     ->placeholder('-'),
                 TextEntry::make('cost_per_sqm')
-                    ->numeric()
+                    ->money('NGN')
                     ->placeholder('-'),
                 TextEntry::make('estimated_completion_cost')
-                    ->money()
+                    ->money('NGN')
                     ->placeholder('-'),
-                TextEntry::make('project_status'),
+                TextEntry::make('project_status')
+                    ->badge(),
+                IconEntry::make('client_portal_visible')
+                    ->boolean(),
                 TextEntry::make('created_at')
                     ->dateTime()
                     ->placeholder('-'),

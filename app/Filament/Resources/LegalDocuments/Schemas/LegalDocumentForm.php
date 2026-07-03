@@ -2,8 +2,9 @@
 
 namespace App\Filament\Resources\LegalDocuments\Schemas;
 
+use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
 
@@ -13,27 +14,30 @@ class LegalDocumentForm
     {
         return $schema
             ->components([
-                TextInput::make('project_id')
-                    ->required()
-                    ->numeric(),
+                Select::make('project_id')
+                    ->relationship('project', 'project_id')
+                    ->searchable()
+                    ->preload()
+                    ->required(),
                 TextInput::make('document_type')
                     ->required(),
                 TextInput::make('document_title')
                     ->required(),
-                Textarea::make('document_body')
-                    ->default(null)
+                RichEditor::make('document_body')
                     ->columnSpanFull(),
-                TextInput::make('legal_status')
-                    ->required()
-                    ->default('Draft'),
-                TextInput::make('legal_officer')
-                    ->default(null),
-                Toggle::make('admin_approved')
+                Select::make('legal_status')
+                    ->options([
+                        'Draft' => 'Draft',
+                        'Under Review' => 'Under Review',
+                        'Approved' => 'Approved',
+                        'Executed' => 'Executed',
+                    ])
+                    ->default('Draft')
                     ->required(),
-                Toggle::make('client_signed')
-                    ->required(),
-                Textarea::make('legal_remarks')
-                    ->default(null)
+                TextInput::make('legal_officer'),
+                Toggle::make('admin_approved'),
+                Toggle::make('client_signed'),
+                TextInput::make('legal_remarks')
                     ->columnSpanFull(),
             ]);
     }

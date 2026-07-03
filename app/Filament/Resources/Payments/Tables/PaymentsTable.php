@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\Payments\Tables;
 
+use App\Filament\Resources\Projects\ProjectResource;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -15,11 +17,14 @@ class PaymentsTable
     {
         return $table
             ->columns([
-                TextColumn::make('project_id')
-                    ->numeric()
+                TextColumn::make('project.project_id')
+                    ->label('Project Ref')
                     ->sortable(),
+                TextColumn::make('project.client.full_name')
+                    ->label('Client')
+                    ->searchable(),
                 TextColumn::make('amount_paid')
-                    ->numeric()
+                    ->money('NGN')
                     ->sortable(),
                 TextColumn::make('payment_date')
                     ->date()
@@ -32,10 +37,6 @@ class PaymentsTable
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
@@ -43,6 +44,11 @@ class PaymentsTable
             ->recordActions([
                 ViewAction::make(),
                 EditAction::make(),
+                Action::make('openProject')
+                    ->label('Project')
+                    ->icon('heroicon-o-building-office-2')
+                    ->color('info')
+                    ->url(fn ($record): string => ProjectResource::getUrl('view', ['record' => $record->project_id])),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

@@ -20,7 +20,13 @@ class MeasurementResource extends Resource
 {
     protected static ?string $model = Measurement::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedScale;
+
+    protected static ?string $navigationLabel = 'Measurements';
+
+    protected static string|\UnitEnum|null $navigationGroup = 'Project Delivery';
+
+    protected static ?int $navigationSort = 1;
 
     public static function form(Schema $schema): Schema
     {
@@ -39,9 +45,7 @@ class MeasurementResource extends Resource
 
     public static function getRelations(): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 
     public static function getPages(): array

@@ -11,10 +11,12 @@ class PaymentInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('project_id')
-                    ->numeric(),
+                TextEntry::make('project.project_id')
+                    ->label('Project Ref'),
+                TextEntry::make('project.client.full_name')
+                    ->label('Client'),
                 TextEntry::make('amount_paid')
-                    ->numeric(),
+                    ->money('NGN'),
                 TextEntry::make('payment_date')
                     ->date(),
                 TextEntry::make('payment_method'),

@@ -20,7 +20,13 @@ class ProcurementItemResource extends Resource
 {
     protected static ?string $model = ProcurementItem::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedShoppingCart;
+
+    protected static ?string $navigationLabel = 'Procurement Items';
+
+    protected static string|\UnitEnum|null $navigationGroup = 'Procurement';
+
+    protected static ?int $navigationSort = 2;
 
     public static function form(Schema $schema): Schema
     {
@@ -39,9 +45,7 @@ class ProcurementItemResource extends Resource
 
     public static function getRelations(): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 
     public static function getPages(): array

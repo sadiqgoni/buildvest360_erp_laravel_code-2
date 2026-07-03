@@ -14,29 +14,35 @@ class MaterialForm
     {
         return $schema
             ->components([
-                TextInput::make('project_id')
-                    ->required()
-                    ->numeric(),
+                Select::make('project_id')
+                    ->relationship('project', 'project_id')
+                    ->searchable()
+                    ->preload()
+                    ->required(),
                 TextInput::make('material_name')
                     ->required(),
                 Select::make('supplier_responsibility')
                     ->options([
-            'Client Supplies' => 'Client supplies',
-            'Contractor Supplies' => 'Contractor supplies',
-            'Shared Supply' => 'Shared supply',
-        ])
+                        'Client Supplies' => 'Client Supplies',
+                        'Contractor Supplies' => 'Contractor Supplies',
+                        'Shared Supply' => 'Shared Supply',
+                    ])
                     ->required(),
                 TextInput::make('estimated_cost')
                     ->required()
                     ->numeric()
-                    ->default(0.0)
-                    ->prefix('$'),
-                TextInput::make('delivery_status')
-                    ->required()
-                    ->default('Pending'),
+                    ->default(0)
+                    ->prefix('NGN'),
+                Select::make('delivery_status')
+                    ->options([
+                        'Pending' => 'Pending',
+                        'Scheduled' => 'Scheduled',
+                        'Delivered' => 'Delivered',
+                    ])
+                    ->default('Pending')
+                    ->required(),
                 DatePicker::make('required_date'),
                 Textarea::make('remarks')
-                    ->default(null)
                     ->columnSpanFull(),
             ]);
     }
