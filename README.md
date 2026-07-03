@@ -37,11 +37,13 @@ php artisan serve --host=127.0.0.1 --port=8001
 - Set `APP_URL` to your live domain
 - Set the real MySQL credentials in `.env`
 - Keep `APP_TIMEZONE=Africa/Lagos`
+- This repo already includes compiled assets in `public/build`, so `npm install` and `npm run build` are not required on the server
+- If you change the theme or frontend later, rebuild locally with `npm run build`, commit the updated `public/build`, and push again
 - Run `php artisan migrate --force`
 - Only run `php artisan db:seed --force` in production if you want the admin user created automatically
 - In production, the seeder now skips demo clients, demo projects, and demo finance data
 - Run `php artisan storage:link` if you later add file uploads
-- Run `php artisan optimize` after deployment
+- Run `php artisan optimize:clear && php artisan optimize` after deployment
 
 ## Login
 

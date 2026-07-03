@@ -4,6 +4,7 @@ namespace App\Providers\Filament;
 
 use App\Filament\Client\Pages\Dashboard;
 use App\Http\Middleware\RoleBasedPanelMiddleware;
+use Filament\Enums\ThemeMode;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -27,6 +28,8 @@ class ClientPanelProvider extends PanelProvider
             ->id('client')
             ->path('client')
             ->login()
+            ->darkMode(false)
+            ->defaultThemeMode(ThemeMode::Light)
             ->brandName('Client Project Portal')
             ->colors([
                 'primary' => Color::Blue,
