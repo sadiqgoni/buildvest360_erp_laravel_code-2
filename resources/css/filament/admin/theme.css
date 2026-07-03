@@ -173,6 +173,39 @@
     box-shadow: 0 24px 60px rgba(30, 58, 138, 0.16);
 }
 
+.fi-simple-main .fi-section {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+}
+
+.fi-simple-header-heading,
+.fi-simple-header-subheading,
+.fi-simple-main .fi-fo-field-wrp-label,
+.fi-simple-main .fi-fo-checkbox-list-option-label,
+.fi-simple-main .fi-fo-checkbox-label,
+.fi-simple-main .fi-fo-field-wrp-helper-text {
+    color: var(--bv-blue-950) !important;
+}
+
+.fi-simple-main .fi-input,
+.fi-simple-main .fi-select-input,
+.fi-simple-main .fi-textarea,
+.fi-simple-main input,
+.fi-simple-main textarea,
+.fi-simple-main select {
+    color: var(--bv-blue-950) !important;
+}
+
+.fi-simple-main input::placeholder,
+.fi-simple-main textarea::placeholder {
+    color: #7b8ca8 !important;
+}
+
+.fi-simple-main .fi-fo-checkbox {
+    border-color: rgba(59, 130, 246, 0.26);
+}
+
 .fi-logo:is(img) {
     border-radius: 0.9rem;
     background: rgba(255, 255, 255, 0.14);
